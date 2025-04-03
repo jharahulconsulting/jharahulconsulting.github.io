@@ -5,7 +5,6 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: '/jharahulconsulting.github.io/', // Add this line for GitHub Pages
   server: {
     host: "::",
     port: 8080,
@@ -20,15 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    outDir: 'dist',
-    sourcemap: mode === 'development', // Only generate sourcemaps in development
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor': ['react', 'react-dom', '@tanstack/react-query']
-        }
-      }
-    }
-  }
 }));
