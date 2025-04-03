@@ -4,6 +4,7 @@
 #
 name: Deploy Next.js site to Pages
 
+
 on:
   # Runs on pushes targeting the default branch
   push:
@@ -73,8 +74,10 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+      - name: Install Next.js 15
+        run: npm install next@15.2.4
       - name: Build with Next.js
-        run: next build
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
