@@ -15,7 +15,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    <script type="module" crossorigin src="/jharahulconsulting.github.io/assets/index-CoYOg0Yo.js"></script>
+    <script type="module" crossorigin src="/jharahulconsulting.github.io/assets/index-I8PLXLZL.js"></script>
+    <link rel="modulepreload" crossorigin href="/jharahulconsulting.github.io/assets/vendor-5231ShEu.js">
     <link rel="stylesheet" crossorigin href="/jharahulconsulting.github.io/assets/index-SEGAI9Ui.css">
   </head>
 
@@ -23,5 +24,14 @@
     <div id="root"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <!-- <script type="module" src="/src/main.tsx"></script> -->
+    <script>
+      (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </body>
 </html>
