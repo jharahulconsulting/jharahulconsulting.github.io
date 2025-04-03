@@ -1,18 +1,21 @@
-on:
-  push:
-    branches:
-      - "main" # change to the branch you wish to deploy from
+name: Deploy to Github Pages
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+on: push
 
 jobs:
   deploy:
+    name: Deploying to Github Pages
+
     runs-on: ubuntu-latest
+
     steps:
-    - id: build-publish
-      uses: bitovi/github-actions-react-to-github-pages@v1.2.4
-      with:
-        path: build # change to your build folder
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Authorizing Github action
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+        uses: oleksiyrudenko/gha-git-credentials@v1
+
+      - name: Doploy to GitHub Pages
+        uses: amitsingh-007/deploy-to-github-pages@v1.1
