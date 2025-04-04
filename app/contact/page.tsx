@@ -35,6 +35,8 @@ const Contact = () => {
   });
 
   useEffect(() => {
+    // Initialize EmailJS with the public key from environment variables
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!);
     setIsMounted(true);
   }, []);
 
