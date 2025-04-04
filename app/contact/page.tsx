@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from '@emailjs/browser';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,10 +8,24 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Clock, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
+const LoadingSkeleton = () => (
+  <div className="animate-pulse space-y-4">
+    <div className="h-12 bg-gray-200 rounded-lg w-full"></div>
+    <div className="grid grid-cols-2 gap-4">
+      <div className="h-12 bg-gray-200 rounded-lg"></div>
+      <div className="h-12 bg-gray-200 rounded-lg"></div>
+    </div>
+    <div className="h-12 bg-gray-200 rounded-lg"></div>
+    <div className="h-32 bg-gray-200 rounded-lg"></div>
+    <div className="h-12 bg-gray-200 rounded-lg"></div>
+  </div>
+);
+
 const Contact = () => {
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,17 +33,23 @@ const Contact = () => {
     service: "",
     message: ""
   });
-  
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
+      console.log('Sending email with data:', formData); // Debug log
+      
       const result = await emailjs.sendForm(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
@@ -37,11 +57,14 @@ const Contact = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
+      console.log('EmailJS response:', result); // Debug log
+
       if (result.text === 'OK') {
         toast({
-          title: "Message sent successfully!",
-          description: "We'll get back to you soon.",
+          title: "✅ Message sent successfully!",
+          description: `We'll get back to you at ${formData.email} soon.`,
           variant: "default",
+          duration: 5000,
         });
 
         setFormData({
@@ -53,16 +76,31 @@ const Contact = () => {
         });
       }
     } catch (error) {
+      console.error('EmailJS error:', error); // Debug log
+      
       toast({
-        title: "Error sending message",
-        description: "Please try again later.",
+        title: "❌ Error sending message",
+        description: "Please try again later or contact us directly.",
         variant: "destructive",
+        duration: 7000,
       });
     } finally {
       setIsLoading(false);
     }
   };
-  
+
+  if (!isMounted) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Navbar />
+        <main className="flex-grow p-8">
+          <LoadingSkeleton />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
