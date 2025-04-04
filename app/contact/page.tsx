@@ -1,6 +1,5 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-import emailjs from '@emailjs/browser';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -48,18 +47,17 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      console.log('Sending email with data:', formData); // Debug log
-      
-      const result = await emailjs.sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formRef.current!,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
+      const response = await fetch('/api/sendemail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      console.log('EmailJS response:', result); // Debug log
+      const data = await response.json();
 
-      if (result.text === 'OK') {
+      if (response.ok) {
         toast({
           title: "✅ Message sent successfully!",
           description: `We'll get back to you at ${formData.email} soon.`,
@@ -74,9 +72,11 @@ const Contact = () => {
           service: "",
           message: ""
         });
+      } else {
+        throw new Error(data.error || 'Failed to send message');
       }
     } catch (error) {
-      console.error('EmailJS error:', error); // Debug log
+      console.error('Error:', error);
       
       toast({
         title: "❌ Error sending message",
