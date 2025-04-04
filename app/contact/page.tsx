@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import emailjs from '@emailjs/browser';
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,20 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
+      const result = await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formRef.current!,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      if (result.text === 'OK') {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you soon.",
+          variant: "default",
+        });
+
         setFormData({
           name: "",
           email: "",
@@ -36,6 +51,7 @@ const Contact = () => {
           service: "",
           message: ""
         });
+      }
     } catch (error) {
       toast({
         title: "Error sending message",
@@ -181,8 +197,8 @@ const Contact = () => {
                     <div>
                       <h3 className="font-bold text-jha-blue text-lg">Office Location</h3>
                       <p className="text-gray-600 mt-2">
-                        123 Business Avenue, Suite 200<br />
-                        New York, NY 10001
+                        Place<br />
+                        India
                       </p>
                     </div>
                   </CardContent>
@@ -197,8 +213,6 @@ const Contact = () => {
                       <h3 className="font-bold text-jha-blue text-lg">Email Us</h3>
                       <p className="text-gray-600 mt-2">
                         General Inquiries: info@jhaconsultancy.co.in<br />
-                        Support: support@jhaconsultancy.com<br />
-                        Careers: careers@jhaconsultancy.com
                       </p>
                     </div>
                   </CardContent>
@@ -212,9 +226,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-bold text-jha-blue text-lg">Call Us</h3>
                       <p className="text-gray-600 mt-2">
-                        Main: (555) 123-4567<br />
-                        Toll-Free: 1-800-555-8888<br />
-                        Fax: (555) 123-4568
+                        (+91) XXXXXXXX
                       </p>
                     </div>
                   </CardContent>
