@@ -4,8 +4,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { FileText, Cloud, Award, BarChart, Users, Briefcase, Presentation, PenTool, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import CallToAction from "@/components/CallToAction";
+import { services } from "@/data/services";
 
 const categories = {
   all: "All Services",
@@ -15,91 +16,28 @@ const categories = {
   skills: "Professional Skills"
 };
 
-const servicesByCategory = {
-  cloud: [
-    {
-      id: "aws-certification",
-      title: "AWS Certification Program",
-      description: "Comprehensive training for various AWS certification paths with mentorship",
-      icon: Cloud,
-      price: "From $499"
-    },
-    {
-      id: "azure-certification",
-      title: "Microsoft Azure Certification",
-      description: "Structured learning path for Azure certifications with practice exams",
-      icon: Cloud,
-      price: "From $499"
-    }
-  ],
-  career: [
-    {
-      id: "interview-coaching",
-      title: "Interview Coaching",
-      description: "Personalized coaching to improve your interview skills with mock interviews",
-      icon: Users,
-      price: "From $149"
-    },
-    {
-      id: "career-strategy",
-      title: "Career Strategy Session",
-      description: "Strategic planning to map out your career path and advancement opportunities",
-      icon: BarChart,
-      price: "From $199"
-    }
-  ],
-  documents: [
-    {
-      id: "resume-writing",
-      title: "Professional Resume Writing",
-      description: "Custom, ATS-optimized resumes tailored to your industry and career goals",
-      icon: FileText,
-      price: "From $199"
-    },
-    {
-      id: "cover-letter",
-      title: "Cover Letter Creation",
-      description: "Compelling cover letters that complement your resume and highlight your value",
-      icon: PenTool,
-      price: "From $99"
-    }
-  ],
-  skills: [
-    {
-      id: "leadership-training",
-      title: "Leadership Development",
-      description: "Targeted training to develop effective leadership and management skills",
-      icon: Award,
-      price: "From $299"
-    },
-    {
-      id: "presentation-skills",
-      title: "Presentation Skills Workshop",
-      description: "Learn to create and deliver impactful presentations for any audience",
-      icon: Presentation,
-      price: "From $199"
-    }
-  ]
-};
-
 const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
   const getFilteredServices = () => {
-    let services = selectedCategory === "all" 
-      ? Object.values(servicesByCategory).flat()
-      : servicesByCategory[selectedCategory as keyof typeof servicesByCategory] || [];
+    let filteredServices = Object.values(services);
+    
+    if (selectedCategory !== "all") {
+      filteredServices = filteredServices.filter(
+        service => service.category === selectedCategory
+      );
+    }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      return services.filter(service => 
+      return filteredServices.filter(service => 
         service.title.toLowerCase().includes(query) ||
         service.description.toLowerCase().includes(query)
       );
     }
 
-    return services;
+    return filteredServices;
   };
 
   const searchBar = (
@@ -166,7 +104,11 @@ const Services = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 {getFilteredServices().length > 0 ? (
                   getFilteredServices().map((service) => (
-                    <Link key={service.id} href={`/services/${service.id}`} className="group">
+                    <Link 
+                      key={service.id} 
+                      href={`/services/${service.id}`} 
+                      className="group"
+                    >
                       <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-t-4 border-jha-blue group-hover:border-jha-orange">
                         <CardHeader className="pb-2">
                           <div className="w-12 h-12 bg-jha-blue rounded-full flex items-center justify-center text-white mb-4 group-hover:bg-jha-orange transition-colors duration-300">

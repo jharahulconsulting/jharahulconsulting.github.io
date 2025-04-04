@@ -196,7 +196,7 @@ const Contact = () => {
                     <div>
                       <h3 className="font-bold text-jha-blue text-lg">Email Us</h3>
                       <p className="text-gray-600 mt-2">
-                        General Inquiries: info@jhaconsultancy.com<br />
+                        General Inquiries: info@jhaconsultancy.co.in<br />
                         Support: support@jhaconsultancy.com<br />
                         Careers: careers@jhaconsultancy.com
                       </p>
