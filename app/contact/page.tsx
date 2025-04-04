@@ -35,24 +35,7 @@ const Contact = () => {
   });
 
   useEffect(() => {
-    const initEmailJs = async () => {
-      try {
-        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-        
-        if (!publicKey) {
-          console.error('EmailJS public key is not defined');
-          return;
-        }
-
-        await emailjs.init(publicKey);
-        console.log('EmailJS initialized successfully');
-        setIsMounted(true);
-      } catch (error) {
-        console.error('Failed to initialize EmailJS:', error);
-      }
-    };
-
-    initEmailJs();
+    setIsMounted(true);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
