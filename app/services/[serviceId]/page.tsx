@@ -10,12 +10,6 @@ import { ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export async function generateStaticParams() {
-  return Object.keys(services).map((serviceId) => ({
-    serviceId,
-  }));
-}
-
 export default function ServicePage() {
   const { serviceId } = useParams();
   const service = services[serviceId as keyof typeof services];
