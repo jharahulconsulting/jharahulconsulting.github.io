@@ -14,7 +14,7 @@ const Hero = () => {
         <div className="max-w-3xl">
           <div className="text-white animate-fade-in">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              Accelerate Your Career Growth
+              Accelerate Your Career Growths
             </h1>
             <p className="mt-6 text-xl md:text-2xl">
               Expert guidance for resume building, cloud certifications, and career advancement.
