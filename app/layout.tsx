@@ -14,6 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+          <meta name="verification" content="your-verification-code-here">
+      </head>
       <body>{children}</body>
     </html>
   )
