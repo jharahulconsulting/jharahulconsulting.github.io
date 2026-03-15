@@ -1,20 +1,22 @@
 import { Button } from "@/components/ui/button";
-import Link from "next/link"
+import Link from "next/link";
+import { MobileAppSlider } from "./MobileAppSlider";
 
 const Hero = () => {
   return (
-    <div 
+    <div
       className="relative min-h-[600px] bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: 'url("/cover.jpg")' }}
     >
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-jha-blue/90 to-blue-800/90"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 relative z-10">
-        <div className="max-w-3xl">
+        {/* Main Hero Content */}
+        <div className="max-w-3xl mb-20">
           <div className="text-white animate-fade-in">
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-              Accelerate Your Career Growths
+              Accelerate Your Career Growthsbudfuasf
             </h1>
             <p className="mt-6 text-xl md:text-2xl">
               Expert guidance for resume building, cloud certifications, and career advancement.
@@ -33,6 +35,11 @@ const Hero = () => {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Mobile App Showcase Slider */}
+        <div className="mt-16 pt-16 border-t border-white/20">
+          <MobileAppSlider />
         </div>
       </div>
     </div>

@@ -1,0 +1,16 @@
+jquery
+1.HeadSet lako manche
+https://www.simplilearn.com/
+
+2.Home page info replace
+We build powerful web and mobile applications that help businesses grow faster. From idea to launch, we create reliable, scalable software designed to solve real problems and deliver real results.
+
+3.>>services
+   >>Cetegory--left side ko points
+      --remove point cloud certification
+
+4.review system,, auto load in website 	
+
+5. mail integration,, book a free consultation 
+
+
