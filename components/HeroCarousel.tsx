@@ -62,7 +62,7 @@ export default function HeroCarousel() {
                 </div>
             </div>
 
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center">
+            <div  className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center">
                 <div className="flex gap-2">
                     <span className={`dot ${currentSlide === 0 ? 'active' : ''}`} onClick={() => setCurrentSlide(0)}></span>
                     <span className={`dot ${currentSlide === 1 ? 'active' : ''}`} onClick={() => setCurrentSlide(1)}></span>
