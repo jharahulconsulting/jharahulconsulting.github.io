@@ -28,7 +28,7 @@ export default function Navbar() {
                 <Link href="/contact" className="hidden lg:block text-slate-600 text-sm font-medium hover:opacity-80 transition-all">Contact</Link>
                 <button
                     className="bg-primary hover:bg-primary-container text-on-primary px-6 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md active:scale-95">
-                    Get Started
+                    Solutions
                 </button>
             </div>
         </div>
