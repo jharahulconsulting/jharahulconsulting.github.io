@@ -12,7 +12,7 @@ export default function CtaSection() {
               Ready to transform your digital infrastructure?
             </h2>
 
-            <div className="text-white text-lg md:text-xl space-y-4 font-medium">
+            <div className="text-white text-lg md:text-xl space-y-4 font-small">
               
               <p>
                 📞 Call / WhatsApp: 
