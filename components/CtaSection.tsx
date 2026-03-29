@@ -36,7 +36,7 @@ export default function CtaSection() {
               </p>
 
               <p>
-                📍 Address: <span className="block sm:inline">Valsad, Gujarat - 396191</span>
+                📍 Address: <span className="block sm:inline">Valsad, Gujarat(INDIA) - 396191</span>
               </p>
 
             </div>
