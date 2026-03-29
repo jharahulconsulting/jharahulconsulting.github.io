@@ -1,106 +1,52 @@
 
-import Link from "next/link"
-import { Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from "lucide-react";
-
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
+export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center mb-4">
-              <span className="text-2xl font-bold text-white">Jha</span>
-              <span className="text-2xl font-bold text-jha-orange">Consultancy</span>
-            </div>
-            <p className="mb-4">
-              Empowering professionals to reach their career goals through expert guidance and personalized solutions.
-            </p>
-            <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white">
-                <Instagram size={20} />
-              </a>
-            </div>
-          </div>
-          
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="hover:text-white">Home</Link>
-              </li>
-              <li>
-                <Link href="/services" className="hover:text-white">Services</Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-white">About Us</Link>
-              </li>
-              <li>
-                <Link href="/testimonials" className="hover:text-white">Testimonials</Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white">Contact</Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Services */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Our Services</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/services/resume-writing" className="hover:text-white">Resume Writing</Link>
-              </li>
-              <li>
-                <Link href="/services/cloud-certifications" className="hover:text-white">Cloud Certifications</Link>
-              </li>
-              <li>
-                <Link href="/services/career-consulting" className="hover:text-white">Career Consulting</Link>
-              </li>
-              <li>
-                <Link href="/services/professional-development" className="hover:text-white">Professional Development</Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-white text-lg font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <MapPin size={18} className="mr-2 mt-1 text-jha-orange" />
-                <span>Place<br />India</span>
-              </li>
-              <li className="flex items-center">
-                <Phone size={18} className="mr-2 text-jha-orange" />
-                <span>(+91)xxxxxxxx</span>
-              </li>
-              <li className="flex items-center">
-                <Mail size={18} className="mr-2 text-jha-orange" />
-                <span>info@jhaconsultancy.co.in</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-800 mt-12 pt-8 text-sm text-center">
-          <p>&copy; {currentYear} JhaConsultancy. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-  );
-};
+    <footer className="w-full py-20 bg-slate-900 text-slate-300">
 
-export default Footer;
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-6">
+            <div className="space-y-6">
+                <span className="text-2xl font-bold text-white tracking-tighter block">JHA CONSULTANCY </span>
+                <p className="font-inter text-sm leading-relaxed text-slate-400">
+                    Engineering Digital Excellence through innovative software solutions and world-class professional
+                    education.
+                </p>
+            </div>
+            <div>
+                <h4 className="font-bold text-white mb-8 uppercase tracking-widest text-xs">Solutions</h4>
+                <div className="flex flex-col gap-4 font-inter text-sm">
+                    <a className="hover:text-primary transition-colors" href="/">Mobile Apps</a>
+                    <a className="hover:text-primary transition-colors" href="/">ERP Development</a>
+                    <a className="hover:text-primary transition-colors" href="/">IT Consultation</a>
+                    <a className="hover:text-primary transition-colors" href="/">Cloud Infrastructure</a>
+                </div>
+            </div>
+            <div>
+                <h4 className="font-bold text-white mb-8 uppercase tracking-widest text-xs">Support</h4>
+                <div className="flex flex-col gap-4 font-inter text-sm">
+                    <a className="hover:text-primary transition-colors" href="/">Help Center</a>
+                    <a className="hover:text-primary transition-colors" href="/">Privacy Policy</a>
+                    <a className="hover:text-primary transition-colors" href="/">Terms of Service</a>
+                    <a className="hover:text-primary transition-colors" href="/">System Status</a>
+                </div>
+            </div>
+            <div>
+                <h4 className="font-bold text-white mb-8 uppercase tracking-widest text-xs">Connect</h4>
+                <div className="flex gap-4">
+                    <a className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"
+                        href="/">
+                        <span className="material-symbols-outlined text-sm">share</span>
+                    </a>
+                    <a className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"
+                        href="/">
+                        <span className="material-symbols-outlined text-sm">mail</span>
+                    </a>
+                </div>
+                <div className="mt-8 text-xs text-slate-500">
+                    © 2024 JHA CONSULTANCY. Engineering Digital Excellence.
+                </div>
+            </div>
+        </div>
+    
+</footer>
+  );
+}

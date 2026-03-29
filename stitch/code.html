@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>JHA | Consultancy</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed": "#e5e2e1",
+                        "outline": "#737785",
+                        "on-secondary-fixed": "#400100",
+                        "on-surface-variant": "#434653",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#dc3220",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container": "#efeded",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface": "#fbf9f9",
+                        "surface-container-low": "#f5f3f3",
+                        "inverse-primary": "#b1c5ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#00419f",
+                        "surface-bright": "#fbf9f9",
+                        "secondary": "#b71507",
+                        "surface-variant": "#e3e2e2",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#303031",
+                        "surface-dim": "#dbdad9",
+                        "inverse-on-surface": "#f2f0f0",
+                        "primary": "#003b93",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "surface-container-high": "#e9e8e7",
+                        "tertiary": "#424141",
+                        "primary-container": "#0051c3",
+                        "tertiary-container": "#595858",
+                        "on-background": "#1b1c1c",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1b1c1c",
+                        "surface-tint": "#1357c9",
+                        "background": "#fbf9f9",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "primary-fixed": "#dae2ff",
+                        "on-secondary-fixed-variant": "#920600",
+                        "surface-container-highest": "#e3e2e2",
+                        "on-primary-fixed": "#001947",
+                        "outline-variant": "#c3c6d6",
+                        "secondary-fixed": "#ffdad4",
+                        "on-primary-container": "#beceff",
+                        "primary-fixed-dim": "#b1c5ff",
+                        "on-tertiary-container": "#d1cece",
+                        "secondary-fixed-dim": "#ffb4a7"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #003b93 0%, #0051c3 100%);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .slide-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+            z-index: 1;
+        }
+
+        .dot {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: #fff;
+            width: 24px;
+            border-radius: 5px;
+        }
+
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: #fbf9f9;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #dae2ff;
+            border-top-color: #003b93;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed"
+    style="overflow: hidden;">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+    </div>
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 glass-nav border-b border-slate-200/50">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-6 h-20">
+            <div class="text-xl font-bold tracking-tighter text-blue-900">JHA CONSULTANCY</div>
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8 font-inter tracking-tight text-sm font-medium">
+                <a class="text-blue-700 font-semibold border-b-2 border-blue-700 pb-1" href="#">Home</a>
+                <a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">Services</a>
+                <a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">Courses</a>
+                <a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">ERP Solutions</a>
+                <a class="text-slate-600 hover:text-blue-600 transition-colors" href="#">About</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="hidden lg:block text-slate-600 text-sm font-medium hover:opacity-80 transition-all">Contact</button>
+                <button
+                    class="bg-primary hover:bg-primary-container text-on-primary px-6 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md active:scale-95">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <!-- Auto-Sliding Hero Carousel -->
+        <section class="carousel-container mt-20">
+
+
+            <!-- Slide 1.0 -->
+
+            <!-- Slide 1.0 - Mobile App Development -->
+
+            <div class="carousel-slide" data-index="2">
+                <div class="slide-bg">
+                    <img alt="Mobile app development UI design"
+                        src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600&auto=format&fit=crop" />
+                </div>
+
+                <div class="slide-overlay"></div>
+
+                <div class="max-w-7xl mx-auto px-6 relative z-10 text-white">
+                    <div class="max-w-2xl space-y-6">
+
+                        <div
+                            class="inline-flex items-center px-3 py-1 bg-tertiary text-white text-xs font-bold uppercase tracking-widest rounded">
+                            Mobile App Development
+                        </div>
+
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Building <span class="text-tertiary-fixed-dim">Next-Gen</span> Mobile Experiences
+                        </h1>
+
+                        <p class="text-lg text-slate-200 leading-relaxed">
+                            We design and develop high-performance mobile applications for Android and iOS, delivering
+                            seamless user experiences, scalability, and cutting-edge functionality tailored to your
+                            business needs.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <button
+                                class="bg-white text-primary px-8 py-3.5 rounded-lg font-bold shadow-xl hover:bg-slate-100 transition-all">
+                                Start Your App
+                            </button>
+                            <button
+                                class="px-8 py-3.5 rounded-lg font-bold border border-white/30 text-white hover:bg-white/10 transition-all">
+                                View Portfolio
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Slide 1 -->
+            <div class="carousel-slide active" data-index="0">
+                <div class="slide-bg">
+                    <img alt="High-tech server room background"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa0lUCxNK4wbJ_0Nomacoy9chayfleXyKiclwRysmS_q1rtznYHMJ00dLv1Pwaow-_0uHRsZN-gmnAbkvFyteDNm7JlY-tqkIzzLBUmsEah0vOKDjI37S5GCxMo-lMzlIGpWrR_EXVl_VgPDh2CFy7hYMB5T2UJQaELpIj0zy5EDj2itLX5HL8JrTDDtiPG3Fn2L-4JxT-qw0HNATvTw3Kpxe4yj6-HHZHwSixymzoh-XXVasu9PqUALc9yC0-tUmJ8mpCVTgTZTcH" />
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="max-w-7xl mx-auto px-6 relative z-10 text-white">
+                    <div class="max-w-2xl space-y-6">
+                        <div
+                            class="inline-flex items-center px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded">
+                            Enterprise Excellence
+                        </div>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Innovative <span class="text-primary-fixed">ERP Solutions</span> for Global Scale
+                        </h1>
+                        <p class="text-lg text-slate-200 leading-relaxed">
+                            Streamline your entire business ecosystem with our custom enterprise resource planning tools
+                            designed for the modern digital era.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <button
+                                class="bg-primary text-white px-8 py-3.5 rounded-lg font-bold shadow-xl hover:bg-blue-700 transition-all">Explore
+                                Systems</button>
+                            <button
+                                class="px-8 py-3.5 rounded-lg font-bold border border-white/30 text-white hover:bg-white/10 transition-all">View
+                                Our Courses</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+
+
+
+            <div class="carousel-slide" data-index="1">
+                <div class="slide-bg">
+                    <img alt="Professional digital transformation workshop"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpiK7RfbNRnPZA94dBZNyNp27jAMVagglp5_xAJSwIIIoqMaNYAsCoWJ5YACdNTA-D_k99wmZFEXNOs-XoHILoI-heFxt6TfC0VW2SDw7ri-dWEcRJHJ4_EYy1VsSvkCjilYunIoq4LNAjCo1CfpeDH0fZdQOgBXVS-JR-4ldpBmJdIkVVFmO7JIyjv8UrGK22B1xRltKviQ3UB_lK-J-pbT4NOLqGqZBv3p2aCqbdd9nT-EHgPEsVBS_oy4k27IeNiJMeBsRbhAEV" />
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="max-w-7xl mx-auto px-6 relative z-10 text-white">
+                    <div class="max-w-2xl space-y-6">
+                        <div
+                            class="inline-flex items-center px-3 py-1 bg-secondary text-white text-xs font-bold uppercase tracking-widest rounded">
+                            Global Training
+                        </div>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Empower Your Team with <span class="text-secondary-fixed-dim">Mastery Courses</span>
+                        </h1>
+                        <p class="text-lg text-slate-200 leading-relaxed">
+                            Upskill with industry-recognized certifications in AI, Database Management, and Enterprise
+                            Development.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <button
+                                class="bg-secondary text-white px-8 py-3.5 rounded-lg font-bold shadow-xl hover:opacity-90 transition-all">Browse
+                                Courses</button>
+                            <button
+                                class="px-8 py-3.5 rounded-lg font-bold border border-white/30 text-white hover:bg-white/10 transition-all">Get
+                                Certified</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Slide 3 -->
+
+
+            <!-- Carousel Navigation -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center">
+                <div class="flex gap-2" id="carousel-dots">
+                    <span class="dot active" onclick="goToSlide(0)"></span>
+                    <span class="dot" onclick="goToSlide(1)"></span>
+                    <span class="dot" onclick="goToSlide(2)"></span>
+                </div>
+            </div>
+            <button
+                class="absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+                onclick="prevSlide()">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+                class="absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
+                onclick="nextSlide()">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </section>
+
+
+        <!-- Features / Consultant Section -->
+        <section class="py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row gap-16 items-center">
+                    <div class="w-full md:w-1/2 order-2 md:order-1">
+                        <div class="relative group">
+                            <div
+                                class="absolute -inset-4 bg-primary-fixed/20 rounded-2xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                            </div>
+                            <img alt="Professional IT consultant with headset"
+                                class="relative rounded-2xl w-full h-[600px] object-cover shadow-2xl"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9SeDr0OX70p4AZadPLCxFadP2FSZRWB1-tbee9x8ma8UylTVAwqFt_hBYRgP2hKsVjob8vzTJF9NgnYevKgbfcDKdJMmzF4_9V34bawhcGGU6vsSaSZTttf-GKKi7rigYVhpglQQnk1sq1EsSnMi-so7sUfUaV1ziAjRlSI0TBsRCdqPG76Jsp2zOj3qAGEr20fs0QeHVbuDNTP2zyRZxgTgHemcBH6NjgXqyznC8lp5GFD7d2ggIm2IRh5YnPhqaktuq5rhPa0hh" />
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 space-y-8 order-1 md:order-2">
+                        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">Expert Consultation at
+                            Your Fingertips</h2>
+                        <p class="text-on-surface-variant leading-relaxed text-lg">
+                            We provide expert certification support with one-on-one guidance, helping you gain the
+                            skills and credentials you need quickly and effectively.
+                        </p>
+                        <ul class="space-y-5 pt-2">
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="material-symbols-outlined text-primary bg-primary-fixed/40 p-1.5 rounded-full text-sm mt-1">check</span>
+                                <div>
+                                    <span class="font-bold block text-slate-900">Direct Industry Access</span>
+                                    <p class="text-sm text-slate-500">Work directly with senior architects and project
+                                        leads.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="material-symbols-outlined text-primary bg-primary-fixed/40 p-1.5 rounded-full text-sm mt-1">check</span>
+                                <div>
+                                    <span class="font-bold block text-slate-900">Personalized Roadmap</span>
+                                    <p class="text-sm text-slate-500">Customized ERP implementation strategies for your
+                                        unique stack.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-4">
+                                <span
+                                    class="material-symbols-outlined text-primary bg-primary-fixed/40 p-1.5 rounded-full text-sm mt-1">check</span>
+                                <div>
+                                    <span class="font-bold block text-slate-900">24/7 Priority Support</span>
+                                    <p class="text-sm text-slate-500">Global assistance for mission-critical operations.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <button
+                            class="bg-slate-900 text-white px-8 py-3 rounded-lg font-bold hover:bg-slate-800 transition-all">Book
+                            a Consultation</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section: Enhanced Grid -->
+        <section class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-slate-900">Strategic IT Services</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Scalable solutions tailored to the
+                        unique demands of modern industry leaders.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10">
+                    <!-- ERP Card -->
+                    <div
+                        class="group relative bg-white p-2 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                        <div class="h-48 overflow-hidden rounded-xl mb-6">
+                            <img alt="ERP Dashboard"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6UqMI4XhnCYyGFgLdk88SOB8UJsRnt29cfI6M_x-hA-65cuGDMUtW_5mBR3gN4xKu2ioPP8BtdA5CZcggPWTtC0Fovek3oZQ_YDzs7Z29cDKUJmuWq3Wv8bjhjzCcfhgcZYY21u7meomKTErYs5f2q9i1nl8qzJp9a8RBVgoo0NbhtfBSjd0BXoLQGzwoU75676mwANXDvQED6BZgUqMmW-qycKen5aFIF-UtI1IEsZYQT-j2FCAOaTGxsRbK3WEFMaa7yh04tqr2" />
+                        </div>
+                        <div class="px-6 pb-8">
+                            <div
+                                class="w-12 h-12 bg-primary/10 flex items-center justify-center rounded-lg mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                <span class="material-symbols-outlined">settings_applications</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">ERP Software Development</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed">End-to-end resource planning systems
+                                that centralize your data and automate complex workflows with AI-driven insights.</p>
+                            <a class="text-primary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                                Learn More <span
+                                    class="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Mobile Apps Card -->
+                    <div
+                        class="group relative bg-white p-2 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                        <div class="h-48 overflow-hidden rounded-xl mb-6">
+                            <img alt="Mobile App Development"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnvYkcIogPg--DqCSPH-fSts7CUPndVTN7QCODBZTG5nYbhyPD8MBzOPV2HC_fwJhfGpHKOYUW24Lgb8DcU_VWUrtAgGJHdov1LXlpFp_95h0V2bvPalebmc_-X7Km6fi-TianGB1M7p0DxQAEsy3M8gXeamMVpekvJ0c3Peef_IICSsk1A2YAPhSy4UazfpNjxZ2hMdJbS2dhi7YKRUDor5dVKtr_3_0wBEwZlL-IavkGIcOPqblEKgOc15zG1bqnGGSl7HcAUr8X" />
+                        </div>
+                        <div class="px-6 pb-8">
+                            <div
+                                class="w-12 h-12 bg-secondary/10 flex items-center justify-center rounded-lg mb-4 text-secondary group-hover:bg-secondary group-hover:text-white transition-colors">
+                                <span class="material-symbols-outlined">smartphone</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">Mobile App Development</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed">Native and cross-platform
+                                applications built for high performance, security, and exceptional user engagement
+                                metrics.</p>
+                            <a class="text-secondary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                                Learn More <span
+                                    class="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Custom IT Card -->
+                    <div
+                        class="group relative bg-white p-2 rounded-2xl shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                        <div class="h-48 overflow-hidden rounded-xl mb-6">
+                            <img alt="Cloud Infrastructure"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgdhjhDMXMidLXoUM-ZpRnNFCgf0TDCa-cDj3VjjKBYeEH4B2m3v4GQlTEKHIUuS5xUyVcmTW5jgL--6XcZIO5f-QjJy4JFks4vOnMGAlTQW6t-1vAtoz9BaFuH5b10UzuIXAnIuKZunpeqwRvUgPHRozY6Vbs0f8WJHSsFAq7TiKLfkMgFl7UiZ-dq6g5XARTFlRsnSwFyUcetbWbnLxAcMZXhynHWokkGBXptc99HJQg3F5tqZjkwTUohZahOXvkRsYHrml82lpH" />
+                        </div>
+                        <div class="px-6 pb-8">
+                            <div
+                                class="w-12 h-12 bg-tertiary/10 flex items-center justify-center rounded-lg mb-4 text-tertiary group-hover:bg-tertiary group-hover:text-white transition-colors">
+                                <span class="material-symbols-outlined">terminal</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-slate-900">Custom IT Solutions</h3>
+                            <p class="text-slate-600 mb-6 text-sm leading-relaxed">Tailored architectural consulting and
+                                legacy system modernization to keep your enterprise ahead of the technical curve.</p>
+                            <a class="text-tertiary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                                Learn More <span
+                                    class="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Course Certifications Section: Enhanced -->
+        <section class="py-24 bg-white overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div class="max-w-2xl">
+                        <h2 class="text-4xl font-extrabold tracking-tight mb-4 text-slate-900">Master the Future</h2>
+                        <p class="text-on-surface-variant text-lg">Accelerate your career with our globally recognized
+                            certification courses led by industry veterans.</p>
+                    </div>
+                    <button
+                        class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-blue-800 transition-colors">Browse
+                        All Courses</button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- AI Certification -->
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:bg-slate-900 hover:text-white cursor-pointer hover:-translate-y-2 shadow-sm">
+                        <div
+                            class="w-16 h-16 mx-auto mb-6 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-3xl" data-weight="fill">neurology</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-2">AI Mastery</h4>
+                        <div class="text-xs uppercase tracking-widest font-bold opacity-60">Professional Badge</div>
+                        <p class="mt-4 text-sm text-slate-500 group-hover:text-slate-300">Generative AI and Large
+                            Language Models.</p>
+                    </div>
+                    <!-- Oracle Certification -->
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:bg-slate-900 hover:text-white cursor-pointer hover:-translate-y-2 shadow-sm">
+                        <div
+                            class="w-16 h-16 mx-auto mb-6 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-secondary group-hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-3xl" data-weight="fill">database</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-2">Oracle Database</h4>
+                        <div class="text-xs uppercase tracking-widest font-bold opacity-60">Certified Expert</div>
+                        <p class="mt-4 text-sm text-slate-500 group-hover:text-slate-300">Advanced SQL and Cloud
+                            Database Admin.</p>
+                    </div>
+                    <!-- Python Certification -->
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:bg-slate-900 hover:text-white cursor-pointer hover:-translate-y-2 shadow-sm">
+                        <div
+                            class="w-16 h-16 mx-auto mb-6 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-blue-500 group-hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-3xl" data-weight="fill">code_blocks</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-2">Python Core</h4>
+                        <div class="text-xs uppercase tracking-widest font-bold opacity-60">Developer Series</div>
+                        <p class="mt-4 text-sm text-slate-500 group-hover:text-slate-300">Data Science and Backend
+                            Engineering.</p>
+                    </div>
+                    <!-- .Net Certification -->
+                    <div
+                        class="group relative p-8 rounded-2xl bg-slate-50 border border-slate-100 text-center transition-all duration-300 hover:bg-slate-900 hover:text-white cursor-pointer hover:-translate-y-2 shadow-sm">
+                        <div
+                            class="w-16 h-16 mx-auto mb-6 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:bg-purple-500 group-hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-3xl" data-weight="fill">developer_mode_tv</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-2">.NET Core</h4>
+                        <div class="text-xs uppercase tracking-widest font-bold opacity-60">Enterprise Ready</div>
+                        <p class="mt-4 text-sm text-slate-500 group-hover:text-slate-300">Microservices and Enterprise
+                            Architecture.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-24 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-slate-900">What Our Clients Say</h2>
+                    <p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Don't just take our word for it. Hear
+                        from the professionals who have transformed their careers and organizations.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">Sarah Jenkins</h4>
+                                <p class="text-sm text-primary font-medium">Tech Lead, Innovate Inc.</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"The AI Mastery certification completely shifted our
+                            team's trajectory. The curriculum was rigorous, practical, and directly applicable."</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">David Thompson</h4>
+                                <p class="text-sm text-primary font-medium">CTO, Vertex Solutions</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"Hello I am Rex, I know Rahul since 3 years , and I am
+                            very happy from his service and team"</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">Emily Rodriguez</h4>
+                                <p class="text-sm text-primary font-medium">Senior Developer</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"The .NET Core enterprise training was phenomenal. I
+                            highly recommend their certification paths for anyone looking to level up."</p>
+                    </div>
+                    <!-- Testimonial 4 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">Michael Chang</h4>
+                                <p class="text-sm text-primary font-medium">Database Admin</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"Earning my Oracle Database certification through JHA
+                            helped me secure a promotion within weeks. The instructors know their stuff."</p>
+                    </div>
+                    <!-- Testimonial 5 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">Jessica Alba</h4>
+                                <p class="text-sm text-primary font-medium">UX/UI Designer</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"Collaborating with the mobile app team was a breeze.
+                            They matched our design precision with flawless native performance."</p>
+                    </div>
+                    <!-- Testimonial 6 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Client"
+                                class="w-14 h-14 rounded-full object-cover shadow-md" />
+                            <div>
+                                <h4 class="font-bold text-slate-900">Robert Foster</h4>
+                                <p class="text-sm text-primary font-medium">Operations Manager</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">"From custom IT solutions to 24/7 support, JHA has
+                            proven to be an indispensable partner for our global operations."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="max-w-7xl mx-auto px-6 py-12 mb-20">
+            <div class="hero-gradient rounded-3xl p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+                <div
+                    class="absolute bottom-0 left-0 w-96 h-96 bg-primary-container/30 rounded-full -ml-32 -mb-32 blur-3xl">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-8">Ready to transform your digital
+                        infrastructure?</h2>
+                    <div class="flex flex-col sm:flex-row justify-center gap-6">
+                        <button
+                            class="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 shadow-xl transition-all hover:scale-105 active:scale-95">Contact
+                            Our Experts</button>
+                        <button
+                            class="bg-primary-container/40 text-white border border-white/20 px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary-container/60 backdrop-blur-sm transition-all hover:scale-105 active:scale-95">Schedule
+                            a Demo</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="w-full py-20 bg-slate-900 text-slate-300">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-7xl mx-auto px-6">
+            <div class="space-y-6">
+                <span class="text-2xl font-bold text-white tracking-tighter block">JHA CONSULTANCY </span>
+                <p class="font-inter text-sm leading-relaxed text-slate-400">
+                    Engineering Digital Excellence through innovative software solutions and world-class professional
+                    education.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-8 uppercase tracking-widest text-xs">Solutions</h4>
+                <div class="flex flex-col gap-4 font-inter text-sm">
+                    <a class="hover:text-primary transition-colors" href="#">Mobile Apps</a>
+                    <a class="hover:text-primary transition-colors" href="#">ERP Development</a>
+                    <a class="hover:text-primary transition-colors" href="#">IT Consultation</a>
+                    <a class="hover:text-primary transition-colors" href="#">Cloud Infrastructure</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-8 uppercase tracking-widest text-xs">Support</h4>
+                <div class="flex flex-col gap-4 font-inter text-sm">
+                    <a class="hover:text-primary transition-colors" href="#">Help Center</a>
+                    <a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                    <a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+                    <a class="hover:text-primary transition-colors" href="#">System Status</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-8 uppercase tracking-widest text-xs">Connect</h4>
+                <div class="flex gap-4">
+                    <a class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"
+                        href="#">
+                        <span class="material-symbols-outlined text-sm">share</span>
+                    </a>
+                    <a class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary transition-all"
+                        href="#">
+                        <span class="material-symbols-outlined text-sm">mail</span>
+                    </a>
+                </div>
+                <div class="mt-8 text-xs text-slate-500">
+                    © 2024 JHA CONSULTANCY. Engineering Digital Excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            let next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            let prev = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(prev);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetInterval();
+        }
+
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        // Initialize first slide state
+        showSlide(0);
+
+        // Preloader Logic
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        });
+    </script>
+</body>
+
+</html>

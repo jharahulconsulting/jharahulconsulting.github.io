@@ -1,26 +1,14 @@
 
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import ServiceHighlights from "@/components/ServiceHighlights";
-import Testimonials from "@/components/Testimonials";
-import StatsSection from "@/components/StatsSection";
-import CallToAction from "@/components/CallToAction";
-import Footer from "@/components/Footer";
+import HeroCarousel from '@/components/HeroCarousel'
+import ServicesGrid from '@/components/ServicesGrid'
+import Testimonials from '@/components/Testimonials'
 
-const Index = () => {
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main className="flex-grow">
-        <Hero />
-        <ServiceHighlights />
-        <StatsSection />
-        <Testimonials />
-        <CallToAction />
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-export default Index;
+    <>
+      <HeroCarousel />
+      <ServicesGrid />
+      <Testimonials />
+    </>
+  )
+}

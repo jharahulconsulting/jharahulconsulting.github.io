@@ -1,209 +1,127 @@
-"use client";
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
-import { FileText, Cloud, Award, BarChart, Users, Briefcase, Presentation, PenTool, Search } from "lucide-react";
-import CallToAction from "@/components/CallToAction";
+import React from 'react';
 
-const categories = {
-  all: "All Services",
-  cloud: "Cloud Certifications",
-  career: "Career Development",
-  documents: "Professional Documents",
-  skills: "Professional Skills"
-};
+export default function CoursesPage() {
+  return (
+    <div className="pt-20 bg-slate-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 pt-12 text-center mb-16">
+        <h1 className="text-5xl font-extrabold text-slate-900">Professional Courses</h1>
+        <p className="mt-4 text-xl text-slate-600">Elevate your career with our industry-leading certifications and training.</p>
+      </div>
 
-const servicesByCategory = {
-  cloud: [
-    {
-      id: "aws-certification",
-      title: "AWS Certification Program",
-      description: "Comprehensive training for various AWS certification paths with mentorship",
-      icon: Cloud,
-      price: "From $499"
-    },
-    {
-      id: "azure-certification",
-      title: "Microsoft Azure Certification",
-      description: "Structured learning path for Azure certifications with practice exams",
-      icon: Cloud,
-      price: "From $499"
-    }
-  ],
-  career: [
-    {
-      id: "interview-coaching",
-      title: "Interview Coaching",
-      description: "Personalized coaching to improve your interview skills with mock interviews",
-      icon: Users,
-      price: "From $149"
-    },
-    {
-      id: "career-strategy",
-      title: "Career Strategy Session",
-      description: "Strategic planning to map out your career path and advancement opportunities",
-      icon: BarChart,
-      price: "From $199"
-    }
-  ],
-  documents: [
-    {
-      id: "resume-writing",
-      title: "Professional Resume Writing",
-      description: "Custom, ATS-optimized resumes tailored to your industry and career goals",
-      icon: FileText,
-      price: "From $199"
-    },
-    {
-      id: "cover-letter",
-      title: "Cover Letter Creation",
-      description: "Compelling cover letters that complement your resume and highlight your value",
-      icon: PenTool,
-      price: "From $99"
-    }
-  ],
-  skills: [
-    {
-      id: "leadership-training",
-      title: "Leadership Development",
-      description: "Targeted training to develop effective leadership and management skills",
-      icon: Award,
-      price: "From $299"
-    },
-    {
-      id: "presentation-skills",
-      title: "Presentation Skills Workshop",
-      description: "Learn to create and deliver impactful presentations for any audience",
-      icon: Presentation,
-      price: "From $199"
-    }
-  ]
-};
+      <div className="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        {/* ISACA */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center mb-6 border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">admin_panel_settings</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">ISACA Courses</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-blue-600">check_circle</span> All ISACA Courses</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-blue-600">check_circle</span> CISA, CISM</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-blue-600">check_circle</span> CRISC, CGEIT</li>
+          </ul>
+        </div>
 
-const Services = () => {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [searchQuery, setSearchQuery] = useState("");
+        {/* Cisco */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-teal-100 text-teal-700 rounded-xl flex items-center justify-center mb-6 border border-teal-200 group-hover:bg-teal-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">router</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Cisco Certifications</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-teal-600">check_circle</span> CCNA</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-teal-600">check_circle</span> CCNP</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-teal-600">check_circle</span> Specialty Certifications</li>
+          </ul>
+        </div>
 
-  const getFilteredServices = () => {
-    let services = selectedCategory === "all" 
-      ? Object.values(servicesByCategory).flat()
-      : servicesByCategory[selectedCategory as keyof typeof servicesByCategory] || [];
+        {/* Google & AWS */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-orange-100 text-orange-700 rounded-xl flex items-center justify-center mb-6 border border-orange-200 group-hover:bg-orange-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">cloud</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Cloud Computing</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-orange-600">check_circle</span> Google Cloud Associate</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-orange-600">check_circle</span> Google Cloud Professional</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-orange-600">check_circle</span> AWS: Associate, Professional, Specialty</li>
+          </ul>
+        </div>
 
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      return services.filter(service => 
-        service.title.toLowerCase().includes(query) ||
-        service.description.toLowerCase().includes(query)
-      );
-    }
+        {/* Microsoft & Oracle */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center mb-6 border border-indigo-200 group-hover:bg-indigo-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">dns</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Microsoft & Oracle</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-indigo-600">check_circle</span> Microsoft: All Available</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-indigo-600">check_circle</span> Oracle: All Available</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-indigo-600">check_circle</span> Database & Enterprise Admin</li>
+          </ul>
+        </div>
 
-    return services;
-  };
+        {/* CompTIA */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center mb-6 border border-purple-200 group-hover:bg-purple-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">security</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">CompTIA</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-purple-600">check_circle</span> All Courses Available</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-purple-600">check_circle</span> A+, Network+, Security+</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-purple-600">check_circle</span> Advanced Specializations</li>
+          </ul>
+        </div>
 
-  const searchBar = (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 mb-8 relative z-10">
-      <div className="bg-white rounded-lg shadow-md p-4 flex items-center gap-3">
-        <Search className="w-5 h-5 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search services..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 border-none focus:ring-0 focus:outline-none text-lg placeholder:text-gray-400"
-        />
+        {/* PMI */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-red-100 text-red-700 rounded-xl flex items-center justify-center mb-6 border border-red-200 group-hover:bg-red-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">add_task</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">PMI Certifications</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-red-600">check_circle</span> PMP, PMI-ACP</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-red-600">check_circle</span> PMI-PBA, PMI-CAPM</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-red-600">check_circle</span> PMI-RMP & More</li>
+          </ul>
+        </div>
+
+        {/* Agile & Management */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-green-100 text-green-700 rounded-xl flex items-center justify-center mb-6 border border-green-200 group-hover:bg-green-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">group_work</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Agile & Management</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-green-600">check_circle</span> SAFe: All Available</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-green-600">check_circle</span> Scrum: All Available</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-green-600">check_circle</span> PeopleCert: ITILv4</li>
+          </ul>
+        </div>
+
+        {/* Industry Specific */}
+        <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-all group">
+          <div className="w-16 h-16 bg-pink-100 text-pink-700 rounded-xl flex items-center justify-center mb-6 border border-pink-200 group-hover:bg-pink-600 group-hover:text-white transition-all">
+            <span className="material-symbols-outlined text-3xl">domain</span>
+          </div>
+          <h3 className="text-2xl font-bold text-slate-900 mb-4">Industry Specific</h3>
+          <ul className="space-y-3 text-slate-600">
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-pink-600">check_circle</span> Real Estate</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-pink-600">check_circle</span> Pharmacy & Nursing</li>
+            <li className="flex items-center gap-2"><span className="material-symbols-outlined text-sm text-pink-600">check_circle</span> Life Insurance</li>
+          </ul>
+        </div>
+
+        {/* And Many More */}
+        <div className="bg-slate-900 p-8 rounded-2xl shadow-xl flex flex-col justify-center items-center text-center group hover:scale-105 transition-all">
+          <span className="material-symbols-outlined text-5xl text-white mb-4">more_horiz</span>
+          <h3 className="text-2xl font-bold text-white mb-2">And Many More...</h3>
+          <p className="text-slate-400">Contact us to find the perfect certification track for your exact career goals.</p>
+        </div>
+
       </div>
     </div>
   );
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-jha-blue text-white py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <h1 className="text-4xl font-bold mb-6">Our Services</h1>
-              <p className="text-xl">
-                Comprehensive career advancement solutions tailored to your professional goals.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {searchBar}
-        
-        {/* Main Content with Sidebar */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Sidebar */}
-            <aside className="md:w-64 flex-shrink-0">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
-                <h2 className="text-xl font-bold text-jha-blue mb-4">Categories</h2>
-                <nav className="space-y-2">
-                  {Object.entries(categories).map(([key, label]) => (
-                    <button
-                      key={key}
-                      onClick={() => setSelectedCategory(key)}
-                      className={`w-full text-left px-4 py-2 rounded-md transition-colors duration-200 ${
-                        selectedCategory === key
-                          ? "bg-jha-blue text-white"
-                          : "text-gray-600 hover:bg-gray-100"
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  ))}
-                </nav>
-              </div>
-            </aside>
-
-            {/* Services Grid */}
-            <div className="flex-grow">
-              <div className="grid md:grid-cols-2 gap-8">
-                {getFilteredServices().length > 0 ? (
-                  getFilteredServices().map((service) => (
-                    <Link key={service.id} href={`/services/${service.id}`} className="group">
-                      <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-t-4 border-jha-blue group-hover:border-jha-orange">
-                        <CardHeader className="pb-2">
-                          <div className="w-12 h-12 bg-jha-blue rounded-full flex items-center justify-center text-white mb-4 group-hover:bg-jha-orange transition-colors duration-300">
-                            <service.icon size={24} />
-                          </div>
-                          <CardTitle className="text-xl text-jha-blue group-hover:text-jha-orange transition-colors duration-300">
-                            {service.title}
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <CardDescription className="text-gray-600 text-base mb-4">
-                            {service.description}
-                          </CardDescription>
-                          <div className="font-medium text-jha-orange">{service.price}</div>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))
-                ) : (
-                  <div className="col-span-2 text-center py-12">
-                    <h3 className="text-xl text-gray-600 mb-2">No services found</h3>
-                    <p className="text-gray-500">
-                      Try adjusting your search or selecting a different category
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <CallToAction />
-      </main>
-      
-      <Footer />
-    </div>
-  );
-};
-
-export default Services;
+}
