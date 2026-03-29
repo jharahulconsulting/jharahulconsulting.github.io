@@ -25,7 +25,7 @@ export default function HeroCarousel() {
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">Building <span className="text-tertiary-fixed-dim">Next-Gen</span> Mobile Experiences</h1>
                         <p className="text-lg text-slate-200 leading-relaxed">We design and develop high-performance mobile applications.</p>
                         <div className="flex flex-wrap gap-4 pt-4">
-                            <button className="bg-white text-primary px-8 py-3.5 rounded-lg font-bold shadow-xl hover:bg-slate-100 transition-all">Start Your App</button>
+                            <button className="bg-white text-black px-8 py-3.5 rounded-lg font-bold shadow-xl hover:bg-slate-100 transition-all" >Start Your App</button>
                         </div>
                     </div>
                 </div>
