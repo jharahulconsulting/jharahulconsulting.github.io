@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function ServicesGrid() { return (
 <>
 <section className="py-24 bg-slate-50">
@@ -24,10 +26,10 @@ export default function ServicesGrid() { return (
                             <h3 className="text-xl font-bold mb-3 text-slate-900">ERP Software Development</h3>
                             <p className="text-slate-600 mb-6 text-sm leading-relaxed">End-to-end resource planning systems
                                 that centralize your data and automate complex workflows with AI-driven insights.</p>
-                            <a className="text-primary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                            <Link className="text-primary font-bold flex items-center gap-2 group/link text-sm" href="/services/erp">
                                 Learn More <span
                                     className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     
@@ -47,10 +49,10 @@ export default function ServicesGrid() { return (
                             <p className="text-slate-600 mb-6 text-sm leading-relaxed">Native and cross-platform
                                 applications built for high performance, security, and exceptional user engagement
                                 metrics.</p>
-                            <a className="text-secondary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                            <Link className="text-secondary font-bold flex items-center gap-2 group/link text-sm" href="/services/mobile">
                                 Learn More <span
                                     className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     
@@ -69,10 +71,10 @@ export default function ServicesGrid() { return (
                             <h3 className="text-xl font-bold mb-3 text-slate-900">Custom IT Solutions</h3>
                             <p className="text-slate-600 mb-6 text-sm leading-relaxed">Tailored architectural consulting and
                                 legacy system modernization to keep your enterprise ahead of the technical curve.</p>
-                            <a className="text-tertiary font-bold flex items-center gap-2 group/link text-sm" href="#">
+                            <Link className="text-tertiary font-bold flex items-center gap-2 group/link text-sm" href="/services/custom-it">
                                 Learn More <span
                                     className="material-symbols-outlined text-xs group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
