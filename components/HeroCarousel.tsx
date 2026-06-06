@@ -16,7 +16,7 @@ export default function HeroCarousel() {
     <section className="carousel-container mt-20">
             <div className={`carousel-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ opacity: currentSlide === 0 ? 1 : 0, transition: 'opacity 1s ease-in-out', position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', alignItems: 'center' }}>
                 <div className="slide-bg" style={{ position: 'absolute', inset: 0, zIndex: -1 }}>
-                    <img alt="Mobile app development" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600&auto=format&fit=crop" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                   <img alt="Mobile app development" src="/background.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="slide-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%)', zIndex: 1 }}></div>
                 <div className="max-w-7xl mx-auto px-6 relative z-10 text-white">
