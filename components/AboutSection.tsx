@@ -20,6 +20,7 @@ export default function AboutSection() { return (
                             We provide expert certification support with one-on-one guidance, helping you gain the
                             skills and credentials you need quickly and effectively.
                         </p>
+                        <a href="">"impact.com"</a>
                         <ul className="space-y-5 pt-2">
                             <li className="flex items-start gap-4">
                                 <span

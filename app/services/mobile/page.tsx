@@ -22,8 +22,10 @@ export default function MobileServicePage() {
             High-Performance Mobile App Development
           </h1>
           <p className="text-lg text-slate-600 max-w-3xl leading-relaxed">
-            We design, develop, and deploy native and cross-platform mobile applications engineered for high efficiency, strict security protocols, and exceptional user engagement.
+            We design, develop, and deploy native and cross-platform mobile applications engineered for high efficiency, strict security protocols, and exceptional user engagement.          
           </p>
+          
+
         </div>
 
         {/* Gallery Grid */}
